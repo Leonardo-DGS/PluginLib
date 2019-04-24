@@ -1,0 +1,5 @@
+name: PluginLib
+main: net.leomixer17.pluginlib.BungeePluginLib
+version: @version@
+description: @description@
+author: Leomixer17

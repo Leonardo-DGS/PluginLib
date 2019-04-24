@@ -1,0 +1,22 @@
+repositories {
+    mavenCentral()
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+}
+
+dependencies {
+    compile project(path: ':common', configuration: 'shadow')
+    compileOnly 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
+}
+
+tasks.jar {
+    enabled = false
+    archiveFileName = 'PluginLib-Bukkit.jar'
+}
+
+tasks.shadowJar {
+    archiveFileName = 'PluginLib-Bukkit.jar'
+}
+
+artifacts {
+    archives shadowJar
+}

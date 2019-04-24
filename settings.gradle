@@ -1,0 +1,4 @@
+rootProject.name = 'PluginLib'
+include 'common'
+include 'bukkit'
+include 'bungee'
