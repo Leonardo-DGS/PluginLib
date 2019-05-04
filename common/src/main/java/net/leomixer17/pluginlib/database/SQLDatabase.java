@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class SQLDatabase extends HikariDataSource {
 
-    public void update(final String sql, final Object... variables)
+    public void update(String sql, Object... variables)
     {
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -46,7 +46,7 @@ public class SQLDatabase extends HikariDataSource {
         }
     }
 
-    public ResultSet query(final String sql, final Object... variables)
+    public ResultSet query(String sql, Object... variables)
     {
         ResultSet rs = null;
         Connection connection = null;
@@ -86,7 +86,7 @@ public class SQLDatabase extends HikariDataSource {
         return rs;
     }
 
-    private static void setVariables(final PreparedStatement stmt, final Object... variables) throws SQLException
+    private static void setVariables(PreparedStatement stmt, Object... variables) throws SQLException
     {
         for (int i = 1; i < variables.length + 1; i++)
         {
@@ -169,7 +169,7 @@ public class SQLDatabase extends HikariDataSource {
         }
     }
 
-    private static int getSQLType(final Object var)
+    private static int getSQLType(Object var)
     {
         if (var instanceof String)
             return Types.VARCHAR;

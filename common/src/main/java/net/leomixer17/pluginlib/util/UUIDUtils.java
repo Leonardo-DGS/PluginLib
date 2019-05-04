@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public final class UUIDUtils {
 
-    public static UUID getOnlineUUID(final String username)
+    public static UUID getOnlineUUID(String username)
     {
         try
         {
@@ -31,28 +31,28 @@ public final class UUIDUtils {
         return null;
     }
 
-    public static UUID getOfflineUUID(final String username)
+    public static UUID getOfflineUUID(String username)
     {
         return UUID.nameUUIDFromBytes(("OfflinePlayer:" + username).getBytes());
     }
 
-    public static boolean isOnlineUUID(final String username, final UUID uuid)
+    public static boolean isOnlineUUID(String username, UUID uuid)
     {
         return getOnlineUUID(username).equals(uuid);
     }
 
-    public static boolean isOfflineUUID(final String username, final UUID uuid)
+    public static boolean isOfflineUUID(String username, UUID uuid)
     {
         return getOfflineUUID(username).equals(uuid);
     }
 
-    public static String getName(final UUID uuid)
+    public static String getName(UUID uuid)
     {
         final List<String> names = getNameHistory(uuid);
         return names.size() == 0 ? null : names.get(names.size() - 1);
     }
 
-    public static List<String> getNameHistory(final UUID uuid)
+    public static List<String> getNameHistory(UUID uuid)
     {
         final List<String> names = new ArrayList<String>();
         try
@@ -81,7 +81,7 @@ public final class UUIDUtils {
         return names;
     }
 
-    public static UUID fromString(final String uuid)
+    public static UUID fromString(String uuid)
     {
         if (uuid.contains("-"))
             return UUID.fromString(uuid);
@@ -93,7 +93,7 @@ public final class UUIDUtils {
         return UUID.fromString(builder.toString());
     }
 
-    public static String trimUUID(final UUID uuid)
+    public static String trimUUID(UUID uuid)
     {
         return uuid.toString().trim().replace("-", "");
     }

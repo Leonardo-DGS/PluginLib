@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public final class SQLDatabaseLibraryUtils {
 
-    public static void downloadDatabaseLibrary(final String libraryUrl, final File jarFile)
+    public static void downloadDatabaseLibrary(String libraryUrl, File jarFile)
     {
         try
         {
@@ -25,7 +25,7 @@ public final class SQLDatabaseLibraryUtils {
         }
     }
 
-    public static void downloadDatabaseLibrary(final URL libraryUrl, final File jarFile)
+    public static void downloadDatabaseLibrary(URL libraryUrl, File jarFile)
     {
         if (!jarFile.exists())
             try
@@ -40,7 +40,7 @@ public final class SQLDatabaseLibraryUtils {
             }
     }
 
-    public static void registerDatabaseDriver(final String driverClassName, final File jarFile)
+    public static void registerDatabaseDriver(String driverClassName, File jarFile)
     {
         try
         {
@@ -55,7 +55,7 @@ public final class SQLDatabaseLibraryUtils {
         }
     }
 
-    public static void registerDatabaseDriver(final String driverClassName, final String libraryUrl, final File jarFile)
+    public static void registerDatabaseDriver(String driverClassName, String libraryUrl, File jarFile)
     {
         try
         {
@@ -67,7 +67,7 @@ public final class SQLDatabaseLibraryUtils {
         }
     }
 
-    public static void registerDatabaseDriver(final String driverClassName, final URL libraryUrl, final File jarFile)
+    public static void registerDatabaseDriver(String driverClassName, URL libraryUrl, File jarFile)
     {
         downloadDatabaseLibrary(libraryUrl, jarFile);
         registerDatabaseDriver(driverClassName, jarFile);

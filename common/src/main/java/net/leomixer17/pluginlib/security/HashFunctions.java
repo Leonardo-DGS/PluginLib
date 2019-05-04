@@ -8,7 +8,7 @@ import java.security.SecureRandom;
 
 public final class HashFunctions {
 
-    public static String getHash(final String text, final String type, final int rounds)
+    public static String getHash(String text, String type, int rounds)
     {
         return rounds > 1 ? getHash(text, type, rounds - 1) : getHash(text, type);
     }
@@ -26,7 +26,7 @@ public final class HashFunctions {
         return getMessageDigestHash(password, algorithm);
     }
 
-    private static String getMessageDigestHash(final String password, final String algorithm)
+    private static String getMessageDigestHash(String password, String algorithm)
     {
         try
         {
@@ -40,12 +40,12 @@ public final class HashFunctions {
         }
     }
 
-    public static boolean isEqual(final String string1, final String string2)
+    public static boolean isEqual(String string1, String string2)
     {
         return MessageDigest.isEqual(string1.getBytes(StandardCharsets.UTF_8), string2.getBytes(StandardCharsets.UTF_8));
     }
 
-    public static String generateSalt(final int length, final String charSet)
+    public static String generateSalt(int length, String charSet)
     {
         final SecureRandom sr = new SecureRandom();
         final StringBuilder sb = new StringBuilder();
@@ -59,67 +59,67 @@ public final class HashFunctions {
         return BCRYPT.gensalt();
     }
 
-    public static String generateBcryptSalt(final int log_rounds)
+    public static String generateBcryptSalt(int log_rounds)
     {
         return BCRYPT.gensalt(log_rounds);
     }
 
-    public static String generateBcryptSalt(final int log_rounds, final SecureRandom random)
+    public static String generateBcryptSalt(int log_rounds, SecureRandom random)
     {
         return BCRYPT.gensalt(log_rounds, random);
     }
 
-    public static String md5(final String password)
+    public static String md5(String password)
     {
         return getMessageDigestHash(password, "MD5");
     }
 
-    public static String sha1(final String password)
+    public static String sha1(String password)
     {
         return getMessageDigestHash(password, "SHA-1");
     }
 
-    public static String sha224(final String password)
+    public static String sha224(String password)
     {
         return getMessageDigestHash(password, "SHA-224");
     }
 
-    public static String sha256(final String password)
+    public static String sha256(String password)
     {
         return getMessageDigestHash(password, "SHA-256");
     }
 
-    public static String sha384(final String password)
+    public static String sha384(String password)
     {
         return getMessageDigestHash(password, "SHA-384");
     }
 
-    public static String sha512(final String password)
+    public static String sha512(String password)
     {
         return getMessageDigestHash(password, "SHA-512");
     }
 
-    public static String whirlpool(final String password)
+    public static String whirlpool(String password)
     {
         return WHIRLPOOL.toHash(password);
     }
 
-    public static String bcrypt(final String password)
+    public static String bcrypt(String password)
     {
         return BCRYPT.hashpw(password, BCRYPT.gensalt());
     }
 
-    public static String bcrypt(final String password, final int log2Rounds)
+    public static String bcrypt(String password, int log2Rounds)
     {
         return BCRYPT.hashpw(password, BCRYPT.gensalt(log2Rounds));
     }
 
-    public static String bcrypt(final String password, final String salt)
+    public static String bcrypt(String password, String salt)
     {
         return BCRYPT.hashpw(password, salt);
     }
 
-    public static boolean bcryptCompare(final String password, final String hash)
+    public static boolean bcryptCompare(String password, String hash)
     {
         return BCRYPT.checkpw(password, hash);
     }

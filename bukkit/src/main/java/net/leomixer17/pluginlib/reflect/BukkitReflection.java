@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 
 public final class BukkitReflection {
 
-    public static Object newFromNMS(final String nms)
+    public static Object newFromNMS(String nms)
     {
         try
         {
@@ -20,7 +20,7 @@ public final class BukkitReflection {
         }
     }
 
-    public static Object newFromOBC(final String obc)
+    public static Object newFromOBC(String obc)
     {
         try
         {
@@ -32,7 +32,7 @@ public final class BukkitReflection {
         }
     }
 
-    public static Class<?> nmsClass(final String nms)
+    public static Class<?> nmsClass(String nms)
     {
         try
         {
@@ -44,7 +44,7 @@ public final class BukkitReflection {
         }
     }
 
-    public static Class<?> obcClass(final String obc)
+    public static Class<?> obcClass(String obc)
     {
         try
         {
@@ -56,7 +56,7 @@ public final class BukkitReflection {
         }
     }
 
-    public static Object getHandle(final Object obj)
+    public static Object getHandle(Object obj)
     {
         try
         {
@@ -69,7 +69,7 @@ public final class BukkitReflection {
         return null;
     }
 
-    public static Field getField(final Class<?> clazz, final String name)
+    public static Field getField(Class<?> clazz, String name)
     {
         try
         {
@@ -84,7 +84,7 @@ public final class BukkitReflection {
         return null;
     }
 
-    public static Method getMethod(final Class<?> clazz, final String name, final Class<?>[] args)
+    public static Method getMethod(Class<?> clazz, String name, Class<?>[] args)
     {
         for (Method m : clazz.getMethods())
         {
@@ -97,7 +97,7 @@ public final class BukkitReflection {
         return null;
     }
 
-    public static boolean classesEqual(final Class<?>[] l1, final Class<?>[] l2)
+    public static boolean classesEqual(Class<?>[] l1, Class<?>[] l2)
     {
         boolean equal = true;
         if (l1.length != l2.length)
@@ -113,7 +113,7 @@ public final class BukkitReflection {
         return equal;
     }
 
-    public static void sendPacket(final Object packet, final Player... players)
+    public static void sendPacket(Object packet, Player... players)
     {
         try
         {

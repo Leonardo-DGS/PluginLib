@@ -8,6 +8,7 @@ import java.util.Map;
 public class YamlConfig {
 
     private static final char SEPARATOR = '.';
+
     final Map<String, Object> self = new LinkedHashMap<>();
     final Map<String, List<String>> comments = new LinkedHashMap<>();
 
@@ -21,12 +22,12 @@ public class YamlConfig {
         return get(path) != null;
     }
 
-    public Object get(final String path)
+    public Object get(String path)
     {
         return null;
     }
 
-    public void set(final String path, final Object value)
+    public void set(String path, Object value)
     {
 
     }
@@ -36,57 +37,57 @@ public class YamlConfig {
         return getKeys(false);
     }
 
-    public Collection<String> getKeys(final boolean deep)
+    public Collection<String> getKeys(boolean deep)
     {
         return null;
     }
 
-    public byte getByte(final String path)
+    public byte getByte(String path)
     {
         return 0;
     }
 
-    public short getShort(final String path)
+    public short getShort(String path)
     {
         return 0;
     }
 
-    public int getInt(final String path)
+    public int getInt(String path)
     {
         return 0;
     }
 
-    public long getLong(final String path)
+    public long getLong(String path)
     {
         return 0;
     }
 
-    public float getFloat(final String path)
+    public float getFloat(String path)
     {
         return 0;
     }
 
-    public double getDouble(final String path)
+    public double getDouble(String path)
     {
         return 0;
     }
 
-    public boolean getBoolean(final String path)
+    public boolean getBoolean(String path)
     {
         return false;
     }
 
-    public char getChar(final String path)
+    public char getChar(String path)
     {
         return '\0';
     }
 
-    public String getString(final String path)
+    public String getString(String path)
     {
         return null;
     }
 
-    public List<?> getList(final String path)
+    public List<?> getList(String path)
     {
         return null;
     }

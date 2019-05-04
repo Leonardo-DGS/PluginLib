@@ -6,12 +6,12 @@ public final class GsonWrapper {
 
     private static final Gson gson = new Gson();
 
-    public static String getString(final Object obj)
+    public static String getString(Object obj)
     {
         return gson.toJson(obj);
     }
 
-    public static <T> T deserializeJson(final String json, final Class<T> type)
+    public static <T> T deserializeJson(String json, final Class<T> type)
     {
         if (json == null)
             return null;

@@ -27,7 +27,7 @@ allprojects {
     }
     tasks.processResources {
         filter ReplaceTokens, tokens: [
-                "version": project.property("version"),
+                "version"    : project.property("version"),
                 "description": project.property("description")
         ]
     }

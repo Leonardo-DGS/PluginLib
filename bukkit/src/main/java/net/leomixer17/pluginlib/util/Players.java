@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public final class Players {
 
-    public static void sendTitle(final Integer fadeIn, final Integer stay, final Integer fadeOut, final String title, final String subtitle, final Player... players)
+    public static void sendTitle(Integer fadeIn, Integer stay, Integer fadeOut, String title, String subtitle, Player... players)
     {
         try
         {
@@ -63,7 +63,7 @@ public final class Players {
         }
     }
 
-    public static void sendActionBar(String text, final Player... players)
+    public static void sendActionBar(String text, Player... players)
     {
         try
         {
@@ -82,17 +82,17 @@ public final class Players {
         }
     }
 
-    public static void clearActionBar(final Player... players)
+    public static void clearActionBar(Player... players)
     {
         sendActionBar("", players);
     }
 
-    public static void clearTitle(final Player... players)
+    public static void clearTitle(Player... players)
     {
         sendTitle(0, 0, 0, "", "", players);
     }
 
-    public static void sendTabTitle(String header, String footer, final Player... players)
+    public static void sendTabTitle(String header, String footer, Player... players)
     {
         if (header == null)
             header = "";
@@ -116,7 +116,7 @@ public final class Players {
         }
     }
 
-    public static int getPing(final Player player)
+    public static int getPing(Player player)
     {
         int ping = 0;
         try
@@ -131,16 +131,16 @@ public final class Players {
         return ping;
     }
 
-    public static void msg(CommandSender sender, String... msgs)
+    public static void sendMessage(CommandSender sender, String... messages)
     {
-        for (String msg : msgs)
+        for (String msg : messages)
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
     }
 
-    public static void msg(String msg, CommandSender... senders)
+    public static void sendMessage(String message, CommandSender... senders)
     {
         for (CommandSender sender : senders)
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
     }
 
     public static Stream<Player> streamInRange(Location center, double radius)

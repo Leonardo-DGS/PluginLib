@@ -7,7 +7,7 @@ public class NMSPlayer {
 
     private final Player player;
 
-    public NMSPlayer(final Player player)
+    public NMSPlayer(Player player)
     {
         this.player = player;
     }
@@ -17,17 +17,17 @@ public class NMSPlayer {
         return this.player;
     }
 
-    public void sendMessage(final String... messages)
+    public void sendMessage(String... messages)
     {
-        Players.msg(this.getPlayer(), messages);
+        Players.sendMessage(this.getPlayer(), messages);
     }
 
-    public void sendTitle(final Integer fadeIn, final Integer stay, final Integer fadeOut, final String title, final String subtitle)
+    public void sendTitle(Integer fadeIn, Integer stay, Integer fadeOut, String title, String subtitle)
     {
         Players.sendTitle(fadeIn, stay, fadeOut, title, subtitle, this.getPlayer());
     }
 
-    public void sendActionBar(final String text)
+    public void sendActionBar(String text)
     {
         Players.sendActionBar(text, this.getPlayer());
     }

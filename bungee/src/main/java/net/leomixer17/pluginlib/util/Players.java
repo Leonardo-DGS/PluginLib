@@ -7,27 +7,27 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public final class Players {
 
-    public static void msg(String[] msgs, CommandSender... senders)
+    public static void sendMessage(String[] messages, CommandSender... senders)
     {
         for (CommandSender sender : senders)
-            for (String msg : msgs)
-                msg(TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', msg)), sender);
+            for (String msg : messages)
+                sendMessage(TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', msg)), sender);
     }
 
-    public static void msg(String msg, CommandSender... senders)
+    public static void sendMessage(String message, CommandSender... senders)
     {
-        msg(TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', msg)), senders);
+        sendMessage(TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', message)), senders);
     }
 
-    public static void msg(BaseComponent msg, CommandSender... senders)
+    public static void sendMessage(BaseComponent message, CommandSender... senders)
     {
-        msg(new BaseComponent[]{msg}, senders);
+        sendMessage(new BaseComponent[]{message}, senders);
     }
 
-    public static void msg(BaseComponent[] msg, CommandSender... senders)
+    public static void sendMessage(BaseComponent[] message, CommandSender... senders)
     {
         for (CommandSender sender : senders)
-            sender.sendMessage(msg);
+            sender.sendMessage(message);
     }
 
 }
