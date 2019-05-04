@@ -2,12 +2,15 @@ package net.leomixer17.pluginlib.util;
 
 import net.leomixer17.pluginlib.reflect.BukkitReflection;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public final class Players {
 
@@ -60,24 +63,18 @@ public final class Players {
         }
     }
 
-    public static void sendActionBar(final String text, final Player... players)
+    public static void sendActionBar(String text, final Player... players)
     {
         try
         {
-            Object e;
-            Object chatText;
-            Constructor<?> subtitleConstructor;
-            Object titlePacket;
+            if (text == null)
+                text = "";
 
-            if (text != null)
-            {
-                e = BukkitReflection.nmsClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("ACTIONBAR").get((Object) null);
-                chatText = BukkitReflection.nmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + text.replace("\\", "\\\\").replace("\"", "\\\"") + "\"}"});
-                subtitleConstructor = BukkitReflection.nmsClass("PacketPlayOutTitle").getConstructor(new Class[]{BukkitReflection.nmsClass("PacketPlayOutTitle").getDeclaredClasses()[0], BukkitReflection.nmsClass("IChatBaseComponent")});
-                titlePacket = subtitleConstructor.newInstance(new Object[]{e, chatText});
-                BukkitReflection.sendPacket(titlePacket, players);
-            }
-
+            final Object e = BukkitReflection.nmsClass("PacketPlayOutTitle").getDeclaredClasses()[0].getField("ACTIONBAR").get((Object) null);
+            final Object chatText = BukkitReflection.nmsClass("IChatBaseComponent").getDeclaredClasses()[0].getMethod("a", new Class[]{String.class}).invoke((Object) null, new Object[]{"{\"text\":\"" + text.replace("\\", "\\\\").replace("\"", "\\\"") + "\"}"});
+            final Constructor<?> subtitleConstructor = BukkitReflection.nmsClass("PacketPlayOutTitle").getConstructor(new Class[]{BukkitReflection.nmsClass("PacketPlayOutTitle").getDeclaredClasses()[0], BukkitReflection.nmsClass("IChatBaseComponent")});
+            final Object titlePacket = subtitleConstructor.newInstance(new Object[]{e, chatText});
+            BukkitReflection.sendPacket(titlePacket, players);
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException | InstantiationException | NoSuchFieldException e)
         {
@@ -144,6 +141,19 @@ public final class Players {
     {
         for (CommandSender sender : senders)
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+    }
+
+    public static Stream<Player> streamInRange(Location center, double radius)
+    {
+        return center.getWorld().getNearbyEntities(center, radius, radius, radius).stream()
+                .filter(e -> e instanceof Player)
+                .map(e -> ((Player) e));
+    }
+
+    public static void forEachInRange(Location center, double radius, Consumer<Player> consumer)
+    {
+        streamInRange(center, radius)
+                .forEach(consumer);
     }
 
 }
