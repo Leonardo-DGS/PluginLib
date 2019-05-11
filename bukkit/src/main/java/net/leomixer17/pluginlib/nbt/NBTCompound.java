@@ -196,7 +196,7 @@ public class NBTCompound {
 
     public NBTType getType(String name)
     {
-        if (MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4) return NBTType.NBTTagEnd;
+        if (MinecraftVersion.getVersion() == MinecraftVersion.v1_7_R4) return NBTType.NBTTagEnd;
         return NBTType.valueOf(NBTReflectionUtil.getType(this, name));
     }
 

@@ -1,5 +1,6 @@
 package net.leomixer17.pluginlib.reflect;
 
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
@@ -12,7 +13,7 @@ public final class BukkitReflection {
     {
         try
         {
-            return nmsClass(nms).newInstance();
+            return getNMSClass(nms).newInstance();
         }
         catch (InstantiationException | IllegalAccessException e)
         {
@@ -24,7 +25,7 @@ public final class BukkitReflection {
     {
         try
         {
-            return obcClass(obc).newInstance();
+            return getOBCClass(obc).newInstance();
         }
         catch (InstantiationException | IllegalAccessException e)
         {
@@ -32,11 +33,11 @@ public final class BukkitReflection {
         }
     }
 
-    public static Class<?> nmsClass(String nms)
+    public static Class<?> getNMSClass(String nms)
     {
         try
         {
-            return Class.forName("net.minecraft.server." + MinecraftVersion.getVersionString() + "." + nms);
+            return Class.forName("net.minecraft.server." + MinecraftVersion.getVersion().toString() + "." + nms);
         }
         catch (ClassNotFoundException e)
         {
@@ -44,11 +45,11 @@ public final class BukkitReflection {
         }
     }
 
-    public static Class<?> obcClass(String obc)
+    public static Class<?> getOBCClass(String obc)
     {
         try
         {
-            return Class.forName("org.bukkit.craftbukkit." + MinecraftVersion.getVersionString() + "." + obc);
+            return Class.forName("org.bukkit.craftbukkit." + MinecraftVersion.getVersion().toString() + "." + obc);
         }
         catch (ClassNotFoundException e)
         {
@@ -60,7 +61,7 @@ public final class BukkitReflection {
     {
         try
         {
-            return getMethod(obj.getClass(), "getHandle", new Class[0]).invoke(obj, new Object[0]);
+            return getDeclaredMethod(obj.getClass(), "getHandle", new Class[0]).invoke(obj, new Object[0]);
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
@@ -73,7 +74,20 @@ public final class BukkitReflection {
     {
         try
         {
-            Field field = clazz.getDeclaredField(name);
+            return clazz.getField(name);
+        }
+        catch (NoSuchFieldException | SecurityException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Field getDeclaredField(Class<?> clazz, String name)
+    {
+        try
+        {
+            final Field field = clazz.getDeclaredField(name);
             field.setAccessible(true);
             return field;
         }
@@ -84,33 +98,61 @@ public final class BukkitReflection {
         return null;
     }
 
-    public static Method getMethod(Class<?> clazz, String name, Class<?>[] args)
+    public static <T> boolean setField(Class<T> from, Object obj, String field, Object newValue)
     {
-        for (Method m : clazz.getMethods())
+        try
         {
-            if ((m.getName().equals(name)) && ((args.length == 0) || (classesEqual(args, m.getParameterTypes()))))
-            {
-                m.setAccessible(true);
-                return m;
-            }
+            final Field f = from.getDeclaredField(field);
+            f.setAccessible(true);
+            f.set(obj, newValue);
+            return true;
+        }
+        catch (Exception e)
+        {
+        }
+        return false;
+    }
+
+    public static Method getDeclaredMethod(Class<?> clazz, String name, Class<?>... args)
+    {
+        try
+        {
+            final Method method = clazz.getDeclaredMethod(name, args);
+            method.setAccessible(true);
+            return method;
+        }
+        catch (NoSuchMethodException e)
+        {
+            e.printStackTrace();
         }
         return null;
     }
 
-    public static boolean classesEqual(Class<?>[] l1, Class<?>[] l2)
+    public static Method getMethod(Class<?> clazz, String name, Class<?>... args)
     {
-        boolean equal = true;
-        if (l1.length != l2.length)
-            return false;
-        for (int i = 0; i < l1.length; i++)
+        try
         {
-            if (l1[i] != l2[i])
-            {
-                equal = false;
-                break;
-            }
+            return clazz.getMethod(name, args);
         }
-        return equal;
+        catch (NoSuchMethodException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object getConnection(Player player)
+    {
+        try
+        {
+            final Object craftPlayer = getHandle(player);
+            return getField(craftPlayer.getClass(), "playerConnection").get(craftPlayer);
+        }
+        catch (SecurityException | IllegalArgumentException | IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void sendPacket(Object packet, Player... players)
@@ -119,15 +161,28 @@ public final class BukkitReflection {
         {
             for (final Player player : players)
             {
-                final Object craftPlayer = getHandle(player);
-                final Object connection = getField(craftPlayer.getClass(), "playerConnection").get(craftPlayer);
-                getMethod(connection.getClass(), "sendPacket", new Class[0]).invoke(connection, packet);
+                final Object connection = getConnection(player);
+                getDeclaredMethod(connection.getClass(), "sendPacket", new Class[0]).invoke(connection, packet);
             }
         }
         catch (IllegalAccessException | InvocationTargetException e)
         {
             e.printStackTrace();
         }
+    }
+
+    public static Object getNMSBlock(Block block)
+    {
+        try
+        {
+            final Method method = getDeclaredMethod(getOBCClass("util.CraftMagicNumbers"), "getBlock", Block.class);
+            return method.invoke(getOBCClass("util.CraftMagicNumbers"), block);
+        }
+        catch (SecurityException | IllegalArgumentException | IllegalAccessException | InvocationTargetException e1)
+        {
+            e1.printStackTrace();
+        }
+        return null;
     }
 
     public static Class<?> getCaller()

@@ -21,52 +21,52 @@ public class NBTReflectionUtil {
 
     private static Class<?> getCraftItemStack()
     {
-        return BukkitReflection.obcClass("inventory.CraftItemStack");
+        return BukkitReflection.getOBCClass("inventory.CraftItemStack");
     }
 
     private static Class<?> getCraftEntity()
     {
-        return BukkitReflection.obcClass("entity.CraftEntity");
+        return BukkitReflection.getOBCClass("entity.CraftEntity");
     }
 
     protected static Class<?> getNBTBase()
     {
-        return BukkitReflection.nmsClass("NBTBase");
+        return BukkitReflection.getNMSClass("NBTBase");
     }
 
     protected static Class<?> getNBTTagString()
     {
-        return BukkitReflection.nmsClass("NBTTagString");
+        return BukkitReflection.getNMSClass("NBTTagString");
     }
 
     protected static Class<?> getNMSItemStack()
     {
-        return BukkitReflection.nmsClass("ItemStack");
+        return BukkitReflection.getNMSClass("ItemStack");
     }
 
     protected static Class<?> getNBTTagCompound()
     {
-        return BukkitReflection.nmsClass("NBTTagCompound");
+        return BukkitReflection.getNMSClass("NBTTagCompound");
     }
 
     protected static Class<?> getNBTCompressedStreamTools()
     {
-        return BukkitReflection.nmsClass("NBTCompressedStreamTools");
+        return BukkitReflection.getNMSClass("NBTCompressedStreamTools");
     }
 
     protected static Class<?> getMojangsonParser()
     {
-        return BukkitReflection.nmsClass("MojangsonParser");
+        return BukkitReflection.getNMSClass("MojangsonParser");
     }
 
     protected static Class<?> getTileEntity()
     {
-        return BukkitReflection.nmsClass("TileEntity");
+        return BukkitReflection.getNMSClass("TileEntity");
     }
 
     protected static Class<?> getCraftWorld()
     {
-        return BukkitReflection.obcClass("CraftWorld");
+        return BukkitReflection.getOBCClass("CraftWorld");
     }
 
     public static Object getNewNBTTag()
@@ -78,7 +78,7 @@ public class NBTReflectionUtil {
     {
         try
         {
-            Class<?> clazz = BukkitReflection.nmsClass("BlockPosition");
+            Class<?> clazz = BukkitReflection.getNMSClass("BlockPosition");
             return clazz.getConstructor(int.class, int.class, int.class).newInstance(x, y, z);
         }
         catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e)
