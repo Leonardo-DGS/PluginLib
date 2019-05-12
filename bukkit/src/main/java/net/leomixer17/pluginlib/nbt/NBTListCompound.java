@@ -116,7 +116,7 @@ public class NBTListCompound {
     {
         try
         {
-            return (Set<String>) compound.getClass().getMethod("c").invoke(compound);
+            return (Set<String>) ReflectionMethod.LISTCOMPOUND_GET_KEYS.run(compound);
         }
         catch (Exception ex)
         {

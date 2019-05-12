@@ -21,7 +21,7 @@ public class NBTFile extends NBTCompound {
         }
         else
         {
-            nbt = NBTReflectionUtil.getNewNBTTag();
+            nbt = ObjectCreator.NMS_NBTTAGCOMPOUND.getInstance();
             save();
         }
     }
