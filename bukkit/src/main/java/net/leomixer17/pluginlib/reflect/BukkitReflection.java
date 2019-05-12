@@ -178,9 +178,9 @@ public final class BukkitReflection {
             final Method method = getDeclaredMethod(getOBCClass("util.CraftMagicNumbers"), "getBlock", Block.class);
             return method.invoke(getOBCClass("util.CraftMagicNumbers"), block);
         }
-        catch (SecurityException | IllegalArgumentException | IllegalAccessException | InvocationTargetException e1)
+        catch (SecurityException | IllegalArgumentException | IllegalAccessException | InvocationTargetException e)
         {
-            e1.printStackTrace();
+            e.printStackTrace();
         }
         return null;
     }
