@@ -34,12 +34,12 @@ public class NMSPlayer {
 
     public void clearActionBar()
     {
-        this.sendActionBar("");
+        Players.clearActionBar(this.getPlayer());
     }
 
     public void clearTitle()
     {
-        this.sendTitle(0, 0, 0, "", "");
+        Players.clearTitle(this.getPlayer());
     }
 
     public void sendTabTitle(String header, String footer)
