@@ -1,6 +1,6 @@
 dependencies {
     compile project(path: ':common', configuration: 'shadow')
-    compileOnly 'org.spigotmc:spigot-api:1.14-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.14.2-R0.1-SNAPSHOT'
 }
 
 tasks.jar {
