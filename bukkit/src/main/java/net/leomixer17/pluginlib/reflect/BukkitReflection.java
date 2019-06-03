@@ -162,7 +162,7 @@ public final class BukkitReflection {
             for (final Player player : players)
             {
                 final Object connection = getConnection(player);
-                getDeclaredMethod(connection.getClass(), "sendPacket", new Class[0]).invoke(connection, packet);
+                getDeclaredMethod(connection.getClass(), "sendPacket", packet.getClass()).invoke(connection, packet);
             }
         }
         catch (IllegalAccessException | InvocationTargetException e)
