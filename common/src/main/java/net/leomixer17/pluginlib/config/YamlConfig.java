@@ -42,6 +42,11 @@ public class YamlConfig {
         return null;
     }
 
+    public YamlConfig getSection(String path)
+    {
+        return null;
+    }
+
     public byte getByte(String path)
     {
         return 0;
