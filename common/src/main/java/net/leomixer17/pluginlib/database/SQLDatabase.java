@@ -86,7 +86,7 @@ public class SQLDatabase extends HikariDataSource {
         return rs;
     }
 
-    protected static void setVariables(PreparedStatement stmt, Object... variables) throws SQLException
+    public static void setVariables(PreparedStatement stmt, Object... variables) throws SQLException
     {
         for (int i = 1; i < variables.length + 1; i++)
         {
