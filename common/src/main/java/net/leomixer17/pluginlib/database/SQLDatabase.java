@@ -86,7 +86,7 @@ public class SQLDatabase extends HikariDataSource {
         return rs;
     }
 
-    private static void setVariables(PreparedStatement stmt, Object... variables) throws SQLException
+    protected static void setVariables(PreparedStatement stmt, Object... variables) throws SQLException
     {
         for (int i = 1; i < variables.length + 1; i++)
         {
@@ -95,7 +95,6 @@ public class SQLDatabase extends HikariDataSource {
                 stmt.setNull(i, getSQLType(var));
             switch (getSQLType(var))
             {
-
                 case Types.LONGVARCHAR:
                 case Types.VARCHAR:
                     stmt.setString(i, (String) var);
