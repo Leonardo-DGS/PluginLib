@@ -79,7 +79,7 @@ public class NBTReflectionUtil {
         Class clazz = ClassWrapper.NMS_ITEMSTACK.getClazz();
         try
         {
-            if (MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.v1_12_R1.getVersionId())
+            if (MinecraftVersion.getVersion().getId() >= MinecraftVersion.v1_12_R1.getId())
             {
                 Constructor<?> constructor = clazz.getConstructor(ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz());
                 constructor.setAccessible(true);

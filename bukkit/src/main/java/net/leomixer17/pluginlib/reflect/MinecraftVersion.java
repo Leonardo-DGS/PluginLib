@@ -6,6 +6,8 @@ public enum MinecraftVersion {
 
     Unknown(Integer.MAX_VALUE),
     v1_7_R4(174),
+    v1_8_R1(181),
+    v1_8_R2(182),
     v1_8_R3(183),
     v1_9_R1(191),
     v1_9_R2(192),
@@ -26,7 +28,7 @@ public enum MinecraftVersion {
         this.versionId = versionId;
     }
 
-    public int getVersionId()
+    public int getId()
     {
         return versionId;
     }

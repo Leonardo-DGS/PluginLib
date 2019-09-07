@@ -36,7 +36,7 @@ public class NBTList {
         try
         {
             Object compound = ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz().newInstance();
-            if (MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.v1_14_R1.getVersionId())
+            if (MinecraftVersion.getVersion().getId() >= MinecraftVersion.v1_14_R1.getId())
             {
                 ReflectionMethod.LIST_ADD.run(listObject, 0, compound);
             }
@@ -99,7 +99,7 @@ public class NBTList {
         }
         try
         {
-            if (MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.v1_14_R1.getVersionId())
+            if (MinecraftVersion.getVersion().getId() >= MinecraftVersion.v1_14_R1.getId())
             {
                 ReflectionMethod.LIST_ADD.run(listObject, 0,
                         ClassWrapper.NMS_NBTTAGSTRING.getClazz().getConstructor(String.class).newInstance(s));
