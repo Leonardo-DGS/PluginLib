@@ -61,7 +61,7 @@ public final class BukkitReflection {
     {
         try
         {
-            return getDeclaredMethod(obj.getClass(), "getHandle", new Class[0]).invoke(obj, new Object[0]);
+            return getDeclaredMethod(obj.getClass(), "getHandle", new Class[0]).invoke(obj);
         }
         catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
         {
