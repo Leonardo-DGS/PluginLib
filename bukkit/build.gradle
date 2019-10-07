@@ -1,6 +1,8 @@
 dependencies {
-    compile project(path: ':common', configuration: 'shadow')
+    compile project(path: ':core', configuration: 'shadow')
     compileOnly 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
+    compileOnly 'me.clip:placeholderapi:2.10.4'
+    compileOnly group: 'com.google.guava', name: 'guava', version: '28.1-jre'
 }
 
 tasks.jar {
